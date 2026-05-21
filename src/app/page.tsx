@@ -142,7 +142,7 @@ export default function Home() {
         </div>
 
         <section
-          className="stage-floor relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-6 text-center sm:pb-20 sm:pt-8"
+          className="stage-floor relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-20 text-center sm:pb-20"
           aria-labelledby="hero-heading"
         >
           <p
