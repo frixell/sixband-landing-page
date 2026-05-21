@@ -1,9 +1,20 @@
+import Image from "next/image";
+
 const PHONE = "0546864499";
 const EMAIL = "shalmonir@yahoo.com";
 const YOUTUBE_VIDEO_ID = "yzV4tOu4HFM";
+const FACEBOOK_URL =
+  "https://www.facebook.com/profile.php?id=100086257967867";
 
 const MEMBERS = [
-  { name: "ניר שלמון", role: "סולן", initial: "נ" },
+  {
+    name: "ניר שלמון",
+    role: "סולן",
+    initial: "נ",
+    photo: "/nir_singer.jpeg",
+    photoZoom: 1.65,
+    photoOffset: { left: -26, top: -6 },
+  },
   { name: "ענבל שגב", role: "סולנית", initial: "ע" },
   { name: "יפתח בר", role: "תופים", initial: "י" },
   { name: "ניר סופר", role: "גיטרה", initial: "נ" },
@@ -66,13 +77,27 @@ function MailIcon() {
   );
 }
 
+function FacebookIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="h-5 w-5"
+      aria-hidden="true"
+    >
+      <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+    </svg>
+  );
+}
+
 function CtaButton({
   href,
   variant,
   children,
 }: {
   href: string;
-  variant: "phone" | "email";
+  variant: "phone" | "email" | "facebook";
   children: React.ReactNode;
 }) {
   const base =
@@ -80,11 +105,28 @@ function CtaButton({
   const styles =
     variant === "phone"
       ? `${base} bg-gradient-to-l from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-900/40 hover:scale-[1.03] hover:shadow-violet-600/30 focus-visible:outline-violet-400`
-      : `${base} border border-white/20 bg-white/5 text-white backdrop-blur-sm hover:border-amber-400/50 hover:bg-white/10 focus-visible:outline-amber-400`;
+      : variant === "email"
+        ? `${base} border border-white/20 bg-white/5 text-white backdrop-blur-sm hover:border-amber-400/50 hover:bg-white/10 focus-visible:outline-amber-400`
+        : `${base} border border-white/20 bg-white/5 text-white backdrop-blur-sm hover:border-blue-400/50 hover:bg-blue-500/10 focus-visible:outline-blue-400`;
+
+  const icon =
+    variant === "phone" ? (
+      <PhoneIcon />
+    ) : variant === "email" ? (
+      <MailIcon />
+    ) : (
+      <FacebookIcon />
+    );
 
   return (
-    <a href={href} className={styles}>
-      {variant === "phone" ? <PhoneIcon /> : <MailIcon />}
+    <a
+      href={href}
+      className={styles}
+      {...(variant === "facebook"
+        ? { target: "_blank", rel: "noopener noreferrer" }
+        : {})}
+    >
+      {icon}
       {children}
     </a>
   );
@@ -114,15 +156,55 @@ function SectionHeading({
   );
 }
 
+function MemberAvatar({ member }: { member: (typeof MEMBERS)[number] }) {
+  const ringClass =
+    "mb-4 h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-white/10 transition group-hover:ring-amber-400/40";
+
+  if ("photo" in member && member.photo) {
+    const zoom =
+      "photoZoom" in member && member.photoZoom ? member.photoZoom : 1.65;
+    const left =
+      "photoOffset" in member && member.photoOffset ? member.photoOffset.left : 32;
+    const top =
+      "photoOffset" in member && member.photoOffset ? member.photoOffset.top : 8;
+
+    return (
+      <div className={`relative ${ringClass}`}>
+        <div
+          className="absolute"
+          style={{
+            width: `${zoom * 100}%`,
+            height: `${zoom * 100}%`,
+            left: `${left}%`,
+            top: `${top}%`,
+          }}
+        >
+          <Image
+            src={member.photo}
+            alt={member.name}
+            fill
+            sizes="64px"
+            className="object-cover"
+          />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`flex items-center justify-center bg-gradient-to-br from-violet-600/40 via-fuchsia-600/30 to-amber-500/30 text-2xl font-bold text-white ${ringClass}`}
+      aria-hidden="true"
+    >
+      {member.initial}
+    </div>
+  );
+}
+
 function MemberCard({ member }: { member: (typeof MEMBERS)[number] }) {
   return (
     <article className="card-glow group flex h-full flex-col items-center rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center transition duration-300 hover:-translate-y-1 hover:border-violet-500/30">
-      <div
-        className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-violet-600/40 via-fuchsia-600/30 to-amber-500/30 text-2xl font-bold text-white ring-2 ring-white/10 transition group-hover:ring-amber-400/40"
-        aria-hidden="true"
-      >
-        {member.initial}
-      </div>
+      <MemberAvatar member={member} />
       <h3 className="text-lg font-bold text-white">{member.name}</h3>
       <p className="mt-1 text-sm text-violet-300/70">{member.role}</p>
     </article>
@@ -145,6 +227,23 @@ export default function Home() {
           className="stage-floor relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-20 text-center sm:pb-20"
           aria-labelledby="hero-heading"
         >
+          <div className="relative mx-auto mb-8 max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-violet-950/40 sm:mb-10 sm:rounded-3xl">
+            <div className="relative h-44 w-full sm:h-56 md:h-64 lg:h-72">
+              <Image
+                src="/hero.jpeg"
+                alt="SIXBAND — להקת קאברים חיה"
+                fill
+                priority
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 896px"
+                className="object-cover object-center"
+              />
+              <div
+                className="absolute inset-0 bg-gradient-to-t from-[#07060f]/80 via-[#07060f]/20 to-violet-900/10"
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+
           <p
             dir="ltr"
             className="mb-4 font-[family-name:var(--font-outfit)] text-sm font-semibold uppercase tracking-[0.35em] text-amber-400/90"
@@ -164,12 +263,15 @@ export default function Home() {
             מופע קאברים סוחף ושמח עם השירים הכי טובים מכל הזמנים.
           </p>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
             <CtaButton href={`tel:${PHONE}`} variant="phone">
               התקשרו להזמנה
             </CtaButton>
             <CtaButton href={`mailto:${EMAIL}`} variant="email">
               שלחו מייל
+            </CtaButton>
+            <CtaButton href={FACEBOOK_URL} variant="facebook">
+              עקבו בפייסבוק
             </CtaButton>
           </div>
 
@@ -303,7 +405,7 @@ export default function Home() {
               להזמנת מופעים לאירועי חברה ולאירועים פרטיים — צרו קשר עכשיו
             </p>
 
-            <div className="mt-8 flex flex-col items-center gap-3 text-lg font-medium text-white/80 sm:flex-row sm:justify-center sm:gap-8">
+            <div className="mt-8 flex flex-col items-center gap-3 text-lg font-medium text-white/80 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-8">
               <a
                 href={`tel:${PHONE}`}
                 className="inline-flex items-center gap-2 transition hover:text-amber-400"
@@ -321,14 +423,29 @@ export default function Home() {
                 <MailIcon />
                 <span dir="ltr">{EMAIL}</span>
               </a>
+              <span className="hidden text-white/20 sm:inline" aria-hidden="true">
+                |
+              </span>
+              <a
+                href={FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 transition hover:text-blue-400"
+              >
+                <FacebookIcon />
+                Facebook
+              </a>
             </div>
 
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <CtaButton href={`tel:${PHONE}`} variant="phone">
                 התקשרו להזמנה
               </CtaButton>
               <CtaButton href={`mailto:${EMAIL}`} variant="email">
                 שלחו מייל
+              </CtaButton>
+              <CtaButton href={FACEBOOK_URL} variant="facebook">
+                עקבו בפייסבוק
               </CtaButton>
             </div>
           </div>
@@ -339,6 +456,15 @@ export default function Home() {
         <p dir="ltr" className="font-[family-name:var(--font-outfit)] text-sm font-bold tracking-[0.25em] text-white/40">
           SIXBAND
         </p>
+        <a
+          href={FACEBOOK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center justify-center gap-2 text-sm text-violet-300/60 transition hover:text-blue-400"
+        >
+          <FacebookIcon />
+          עקבו בפייסבוק
+        </a>
         <p className="mt-2 text-xs text-white/25">
           © {new Date().getFullYear()} SIXBAND · Live music show
         </p>
