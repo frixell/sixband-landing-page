@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { GalleryCarousel } from "@/components/GalleryCarousel";
 
 const PHONE = "0546864499";
 const EMAIL = "shalmonir@yahoo.com";
@@ -14,13 +15,52 @@ const MEMBERS = [
     photo: "/nir_singer.jpeg",
     photoZoom: 1.65,
     photoOffset: { left: -26, top: -6 },
+    photoObjectPosition: "38% 26%",
   },
-  { name: "ענבל שגב", role: "סולנית", initial: "ע" },
+  {
+    name: "ענבל שגב",
+    role: "סולנית",
+    initial: "ע",
+    photo: "/inbal.jpeg",
+    photoZoom: 1.65,
+    photoOffset: { left: -9, top: 0 },
+    photoObjectPosition: "52% 20%",
+  },
   { name: "יפתח בר", role: "תופים", initial: "י" },
-  { name: "ניר סופר", role: "גיטרה", initial: "נ" },
+  {
+    name: "ניר סופר",
+    role: "גיטרה",
+    initial: "נ",
+    photo: "/nir_guitar.jpg",
+    photoZoom: 1,
+    photoOffset: { left: 0, top: 0 },
+    photoObjectPosition: "center top",
+  },
   { name: "איתי זהבי", role: "קלידים", initial: "א" },
   { name: "טל ירד", role: "בס", initial: "ט" },
-  { name: "מוש קיינר", role: "סקסופון", initial: "מ" },
+  {
+    name: "מוש קיינר",
+    role: "סקסופון",
+    initial: "מ",
+    photo: "/mosh.jpeg",
+    photoZoom: 1,
+    photoOffset: { left: -10, top: 8 },
+    photoObjectPosition: "46% 22%",
+  },
+] as const;
+
+const GALLERY_IMAGES = [
+  "/gallery/gal_1.jpg",
+  "/gallery/gal_2.jpg",
+  "/gallery/gal_3.jpg",
+  "/gallery/gal_4.JPG",
+  "/gallery/gal_5.jpeg",
+  "/gallery/gal_6.jpeg",
+  "/gallery/gal_7.jpeg",
+  "/gallery/gal_8.jpeg",
+  "/gallery/gal_9.jpeg",
+  "/gallery/gal_10.jpeg",
+  "/gallery/gal_11.jpeg",
 ] as const;
 
 const EVENTS = [
@@ -185,6 +225,12 @@ function MemberAvatar({ member }: { member: (typeof MEMBERS)[number] }) {
             fill
             sizes="64px"
             className="object-cover"
+            style={{
+              objectPosition:
+                "photoObjectPosition" in member && member.photoObjectPosition
+                  ? member.photoObjectPosition
+                  : "center center",
+            }}
           />
         </div>
       </div>
@@ -304,6 +350,20 @@ export default function Home() {
                 className="absolute inset-0 h-full w-full border-0"
               />
             </div>
+          </div>
+        </section>
+
+        <section
+          id="gallery"
+          className="relative border-t border-white/5 bg-gradient-to-b from-violet-950/15 to-transparent py-20 sm:py-28"
+          aria-labelledby="gallery-heading"
+        >
+          <div className="mx-auto max-w-6xl px-6">
+            <SectionHeading subtitle="תמונות מהבמה — אנרגיה, אור וריקודים">
+              <span id="gallery-heading">גלריה</span>
+            </SectionHeading>
+
+            <GalleryCarousel images={GALLERY_IMAGES} />
           </div>
         </section>
 
