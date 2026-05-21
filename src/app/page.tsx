@@ -230,7 +230,7 @@ export default function Home() {
           <div className="relative mx-auto mb-8 max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-violet-950/40 sm:mb-10 sm:rounded-3xl">
             <div className="relative h-44 w-full sm:h-56 md:h-64 lg:h-72">
               <Image
-                src="/hero.jpeg"
+                src="/hero2.jpeg"
                 alt="SIXBAND — להקת קאברים חיה"
                 fill
                 priority
