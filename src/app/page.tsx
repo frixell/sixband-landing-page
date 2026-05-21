@@ -42,10 +42,10 @@ const MEMBERS = [
     name: "מוש קיינר",
     role: "סקסופון",
     initial: "מ",
-    photo: "/mosh.jpeg",
+    photo: "/mosh.jpg",
     photoZoom: 1,
-    photoOffset: { left: -10, top: 8 },
-    photoObjectPosition: "46% 22%",
+    photoOffset: { left: 0, top: 0 },
+    photoObjectPosition: "center top",
   },
 ] as const;
 
