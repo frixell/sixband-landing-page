@@ -270,7 +270,7 @@ export default function Home() {
         </div>
 
         <section
-          className="stage-floor relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-20 text-center sm:pb-20"
+          className="stage-floor relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-10 text-center sm:pb-20"
           aria-labelledby="hero-heading"
         >
           <div className="relative mx-auto mb-8 max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-violet-950/40 sm:mb-10 sm:rounded-3xl">
