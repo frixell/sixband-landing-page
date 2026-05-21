@@ -93,12 +93,14 @@ function CtaButton({
 function SectionHeading({
   children,
   subtitle,
+  compact = false,
 }: {
   children: React.ReactNode;
   subtitle?: string;
+  compact?: boolean;
 }) {
   return (
-    <div className="mb-12 text-center">
+    <div className={`text-center ${compact ? "mb-8" : "mb-12"}`}>
       <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
         {children}
       </h2>
@@ -139,28 +141,8 @@ export default function Home() {
           <div className="absolute bottom-0 right-0 h-[300px] w-[400px] rounded-full bg-fuchsia-600/15 blur-[100px]" />
         </div>
 
-        <nav
-          className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6"
-          aria-label="ניווט ראשי"
-        >
-          <span
-            dir="ltr"
-            className="font-[family-name:var(--font-outfit)] text-xl font-black tracking-[0.2em] text-white"
-          >
-            SIXBAND
-          </span>
-          <div className="flex gap-3">
-            <a
-              href={`tel:${PHONE}`}
-              className="hidden rounded-full border border-white/10 px-4 py-2 text-sm text-violet-200 transition hover:border-violet-400/40 hover:text-white sm:inline-block"
-            >
-              {PHONE}
-            </a>
-          </div>
-        </nav>
-
         <section
-          className="stage-floor relative z-10 mx-auto max-w-6xl px-6 pb-24 pt-8 text-center sm:pb-32 sm:pt-12"
+          className="stage-floor relative z-10 mx-auto max-w-6xl px-6 pb-14 pt-6 text-center sm:pb-20 sm:pt-8"
           aria-labelledby="hero-heading"
         >
           <p
@@ -182,11 +164,7 @@ export default function Home() {
             מופע קאברים סוחף ושמח עם השירים הכי טובים מכל הזמנים.
           </p>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base text-white/50" dir="ltr">
-            Seven-member live cover band · Company &amp; private events
-          </p>
-
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <CtaButton href={`tel:${PHONE}`} variant="phone">
               התקשרו להזמנה
             </CtaButton>
@@ -195,7 +173,7 @@ export default function Home() {
             </CtaButton>
           </div>
 
-          <p className="mt-10 text-sm font-medium text-amber-400/80">
+          <p className="mt-8 text-sm font-medium text-amber-400/80">
             להזמנת מופעים לאירועי חברה ולאירועים פרטיים
           </p>
         </section>
@@ -204,10 +182,10 @@ export default function Home() {
       <main>
         <section
           id="video"
-          className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28"
+          className="relative mx-auto max-w-6xl px-6 pb-20 pt-8 sm:pb-28 sm:pt-10"
           aria-labelledby="video-heading"
         >
-          <SectionHeading subtitle="חוויה מההופעה — ישירות אליכם">
+          <SectionHeading compact subtitle="חוויה מההופעה — ישירות אליכם">
             <span id="video-heading">
               צפו ב <span dir="ltr" className="font-[family-name:var(--font-outfit)]">SIXBAND</span> בהופעה
             </span>
@@ -240,15 +218,12 @@ export default function Home() {
             <div className="mx-auto max-w-3xl space-y-6 text-center text-lg leading-relaxed text-violet-100/80">
               <p>
                 <span dir="ltr" className="font-[family-name:var(--font-outfit)] font-bold text-amber-400">SIXBAND</span>{" "}
-                היא להקת קאברים חיה בת שבעה נגנים, המביאה מופע אנרגטי, שמח ומרגש
+                היא להקת קאברים בת שבעה נגנים, המביאה מופע אנרגטי, שמח ומרגש
                 עם השירים האהובים ביותר מכל הזמנים.
               </p>
               <p>
                 אנחנו מתמחים באירועי חברה ואירועים פרטיים — עם סאונד מקצועי,
                 ביצועים חיים ואווירה שממלאת את הרחבה בשמחה וריקודים.
-              </p>
-              <p className="text-base text-white/45" dir="ltr">
-                SIXBAND is a seven-member live cover band for company events and private events.
               </p>
             </div>
           </div>
