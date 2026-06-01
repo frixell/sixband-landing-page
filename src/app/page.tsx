@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ContactForm } from "@/components/ContactForm";
 import { GalleryCarousel } from "@/components/GalleryCarousel";
 
 const PHONE = "0546864499";
@@ -508,6 +509,8 @@ export default function Home() {
                 עקבו בפייסבוק
               </CtaButton>
             </div>
+
+            <ContactForm />
           </div>
         </section>
       </main>
