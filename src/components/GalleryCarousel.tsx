@@ -144,7 +144,7 @@ export function GalleryCarousel({ images }: GalleryCarouselProps) {
 
         <div
           ref={thumbStripRef}
-          className="flex h-full min-w-0 flex-1 items-center gap-2 overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="flex h-full min-w-0 flex-1 items-center gap-2 overflow-x-hidden scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           role="tablist"
           aria-label="תמונות הגלריה"
         >

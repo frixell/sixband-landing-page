@@ -21,6 +21,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  overscroll-behavior-x: none;
 }
 
 body {
@@ -28,6 +29,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-heebo), system-ui, sans-serif;
   overflow-x: clip;
+  overscroll-behavior-x: none;
 }
 
 .spotlight-gradient {
