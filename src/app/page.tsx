@@ -260,7 +260,7 @@ function MemberCard({ member }: { member: (typeof MEMBERS)[number] }) {
 
 export default function Home() {
   return (
-    <>
+    <div className="overflow-x-clip">
       <header className="spotlight-gradient relative overflow-hidden">
         <div
           className="pointer-events-none absolute inset-0 opacity-30"
@@ -532,6 +532,6 @@ export default function Home() {
           © {new Date().getFullYear()} SIXBAND · Live music show
         </p>
       </footer>
-    </>
+    </div>
   );
 }

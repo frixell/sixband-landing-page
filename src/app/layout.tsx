@@ -32,8 +32,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="he" dir="rtl" className={`${heebo.variable} ${outfit.variable} scroll-smooth`}>
-      <body className="min-h-screen bg-[#07060f] text-[#f4f0ff] antialiased">
+    <html
+      lang="he"
+      dir="rtl"
+      className={`${heebo.variable} ${outfit.variable} scroll-smooth overflow-x-hidden`}
+    >
+      <body className="min-h-screen overflow-x-hidden bg-[#07060f] text-[#f4f0ff] antialiased">
         {children}
       </body>
     </html>
