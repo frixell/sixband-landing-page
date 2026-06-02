@@ -58,16 +58,14 @@ export function ContactForm() {
         או השאירו פרטים ונחזור אליכם
       </p>
 
-      <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden>
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          name="website"
-          type="text"
-          tabIndex={-1}
-          autoComplete="off"
-        />
-      </div>
+      <input
+        name="website"
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden
+      />
 
       <div className="space-y-4">
         <div>
