@@ -260,8 +260,8 @@ function MemberCard({ member }: { member: (typeof MEMBERS)[number] }) {
 
 export default function Home() {
   return (
-    <div className="overflow-x-clip">
-      <header className="spotlight-gradient relative overflow-hidden">
+    <div className="overflow-x-hidden">
+      <header className="spotlight-gradient relative overflow-x-hidden">
         <div
           className="pointer-events-none absolute inset-0 opacity-30"
           aria-hidden="true"
@@ -328,7 +328,7 @@ export default function Home() {
         </section>
       </header>
 
-      <main>
+      <main className="overflow-x-hidden">
         <section
           id="video"
           className="relative mx-auto max-w-6xl px-6 pb-20 pt-8 sm:pb-28 sm:pt-10"
@@ -515,7 +515,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-white/5 px-6 py-10 text-center">
+      <footer className="overflow-x-hidden border-t border-white/5 px-6 py-10 text-center">
         <p dir="ltr" className="font-[family-name:var(--font-outfit)] text-sm font-bold tracking-[0.25em] text-white/40">
           SIXBAND
         </p>
